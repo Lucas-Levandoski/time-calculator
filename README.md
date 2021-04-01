@@ -29,18 +29,64 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### ESLint
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+IDE: VS CODE
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Install the following extensions
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+Name: ESLint
+Id: dbaeumer.vscode-eslint
+Description: Integrates ESLint JavaScript into VS Code.
+Version: 2.1.19
+Publisher: Dirk Baeumer
+VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
+```
 
-## Learn More
+```
+Name: Prettier - Code formatter
+Id: esbenp.prettier-vscode
+Description: Code formatter using prettier
+Version: 6.3.1
+Publisher: Prettier
+VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+For prettier to work with Typescript is required to add this code to vscode settings.json:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```json
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": false
+      },
+      "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": false
+      },
+      "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": false
+      },
+      "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": false
+      },
+      "eslint.autoFixOnSave": true,
+      "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        {
+          "autoFix": true,
+          "language": "typescript"
+        },
+        {
+          "autoFix": true,
+          "language": "typescriptreact"
+        }
+      ],
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+```
