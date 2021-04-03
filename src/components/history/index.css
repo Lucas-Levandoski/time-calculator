@@ -1,0 +1,47 @@
+.history-container {
+  min-width: 300px;
+  max-height: 100%;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.history-table {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  overflow-y: scroll;
+}
+
+.history-table tr {
+  padding: 10px;
+  height: 80px;
+}
+
+.history-table p {
+  cursor: pointer;
+  padding: 3px;
+}
+
+.equation-box {
+  margin: 5px 5px 0 5px;
+  text-align: left;
+}
+
+.result-box {
+  margin: 0 5px 5px 5px;
+  text-align: right;
+}
+
+.history-table p:hover {
+  border-radius: 5px;
+  border: solid 2px blueviolet;
+}
+
+.history-table tr:nth-child(odd) td {
+  background-color: #CADBE1;
+}
+
+.history-table tr:nth-child(even) td {
+  background-color: #8EB1BC;
+}

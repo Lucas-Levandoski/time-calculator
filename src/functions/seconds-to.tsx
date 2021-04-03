@@ -8,7 +8,7 @@ export function SecondsToDays(fromSeconds: number) {
   const minutes = Math.floor(toDays / 60);
   toDays -= minutes * 60;
   const seconds = toDays;
-  return `${days}d ${hours}:${minutes}:${seconds}`;
+  return `${days}d ${hours}h ${minutes}m ${seconds}s `;
 }
 
 export function SecondsToHours(fromSeconds: number) {
@@ -18,7 +18,7 @@ export function SecondsToHours(fromSeconds: number) {
   const minutes = Math.floor(toHours / 60);
   toHours -= minutes * 60;
   const seconds = toHours;
-  return `${hours}:${minutes}:${seconds}`;
+  return `${hours}h ${minutes}m ${seconds}s `;
 }
 
 export function SecondsToMinutes(fromSeconds: number) {
@@ -26,5 +26,5 @@ export function SecondsToMinutes(fromSeconds: number) {
   const minutes = Math.floor(toMinutes / 60);
   toMinutes -= minutes * 60;
   const seconds = toMinutes;
-  return `${minutes}:${seconds}`;
+  return `${minutes}m ${seconds}s `;
 }

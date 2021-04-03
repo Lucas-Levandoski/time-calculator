@@ -5,8 +5,10 @@ import './index.css';
 
 export default function LandingPage() {
   return (
-    <div>
-      <Calculator />
+    <div className="landing-page">
+      <div className="calc-frame">
+        <Calculator />
+      </div>
     </div>
   );
 }
