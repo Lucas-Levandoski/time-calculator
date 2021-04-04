@@ -1,6 +1,6 @@
 import * as math from 'mathjs';
 
-export default function EquationToSeconds(operations: string[]) {
+export function EquationToSeconds2(operations: string[]) {
   let record = '(';
   let equation = '';
 
@@ -31,4 +31,15 @@ export default function EquationToSeconds(operations: string[]) {
   equation += `${record})`;
 
   return math.evaluate(equation);
+}
+
+export default function EquationToSeconds(equation: string) {
+  let equationToRun = equation;
+
+  equationToRun = equationToRun.replaceAll('d', '*86400');
+  equationToRun = equationToRun.replaceAll('h', '*3600');
+  equationToRun = equationToRun.replaceAll('m', '*60');
+  equationToRun = equationToRun.replaceAll('s', '*1');
+
+  return math.evaluate(equationToRun);
 }

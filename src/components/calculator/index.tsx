@@ -1,9 +1,9 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { FaHistory } from 'react-icons/fa';
-import { SecondsToDays, SecondsToHours, SecondsToMinutes } from '../../functions/seconds-to';
-import EquationToSeconds from '../../functions/equation-to-seconts';
+import {
+  SecondsToDays, SecondsToHours, SecondsToMinutes, SecondsToSeconds,
+} from '../../functions/seconds-to';
+import EquationToSeconds, { EquationToSeconds2 } from '../../functions/equation-to-seconds';
 import ValidateInput from '../../functions/validate-input';
 import History, { IEquation } from '../history';
 
@@ -11,7 +11,7 @@ import './index.css';
 
 export default function Calculator() {
   const [calcInput, setCalcInput] = useState('');
-  const [resultType, setResultType] = useState('days');
+  const [resultType, setResultType] = useState('hours');
   const [errorInput, setErrorInput] = useState(null);
   const [showHistory, setShowHistory] = useState(false);
   const [history, setHistory] = useState<IEquation[]>([]);
@@ -26,13 +26,13 @@ export default function Calculator() {
     setHistory(history);
   };
 
-  const executeOperations = (operations: string[]) => {
-    const hasError = ValidateInput(operations);
+  const executeOperations = (equation: string) => {
+    const hasError = ValidateInput(equation);
 
-    if (!hasError && operations.length > 0) {
+    if (!hasError && equation.length > 0) {
       setErrorInput(null);
 
-      const totalSeconds = EquationToSeconds(operations);
+      const totalSeconds = EquationToSeconds(equation);
 
       let result = '';
 
@@ -47,7 +47,7 @@ export default function Calculator() {
           result = SecondsToMinutes(totalSeconds);
           break;
         case 'seconds':
-          result = totalSeconds;
+          result = SecondsToSeconds(totalSeconds);
           break;
         default:
       }
@@ -59,17 +59,10 @@ export default function Calculator() {
     }
   };
 
-  const splitText = (rawInput: string) => {
-    const input = rawInput.replaceAll('\n', ' ');
-    return input.split(' ').filter((item) => item !== ' ' && item !== '');
-  };
-
   const submitCalcInput = (e: any) => {
     e.preventDefault();
 
-    const splitedText = splitText(calcInput);
-
-    executeOperations(splitedText);
+    executeOperations(calcInput);
   };
 
   const addCharacter = (character: string) => {
@@ -86,17 +79,17 @@ export default function Calculator() {
             onChange={(e) => setCalcInput(e.target.value)}
           />
           <div className="result-type-list">
-            <span>
-              <input type="radio" value="days" name="timeType" /> in Days
+            <span onClick={() => setResultType('days')}>
+              <input type="radio" value="days" name="timeType" checked={resultType === 'days'} /> in days
             </span>
-            <span>
-              <input type="radio" value="hours" name="timeType" /> in Hours
+            <span onClick={() => setResultType('hours')}>
+              <input type="radio" value="hours" name="timeType" checked={resultType === 'hours'} /> in hours
             </span>
-            <span>
-              <input type="radio" value="minutes" name="timeType" /> in Mins
+            <span onClick={() => setResultType('minutes')}>
+              <input type="radio" value="minutes" name="timeType" checked={resultType === 'minutes'} /> in mins
             </span>
-            <span>
-              <input type="radio" value="seconds" name="timeType" /> in Secs
+            <span onClick={() => setResultType('seconds')}>
+              <input type="radio" value="seconds" name="timeType" checked={resultType === 'seconds'} /> in secs
             </span>
           </div>
           <table className="calc-keyboard">
@@ -105,25 +98,31 @@ export default function Calculator() {
                 <td className="is-number" onClick={() => addCharacter('1')}>1</td>
                 <td className="is-number" onClick={() => addCharacter('2')}>2</td>
                 <td className="is-number" onClick={() => addCharacter('3')}>3</td>
-                <td className="is-operation" onClick={() => addCharacter('d ')}>d</td>
+                <td className="is-operation" onClick={() => addCharacter('d')}>d</td>
               </tr>
               <tr>
                 <td className="is-number" onClick={() => addCharacter('4')}>4</td>
                 <td className="is-number" onClick={() => addCharacter('5')}>5</td>
                 <td className="is-number" onClick={() => addCharacter('6')}>6</td>
-                <td className="is-operation" onClick={() => addCharacter('h ')}>h</td>
+                <td className="is-operation" onClick={() => addCharacter('h')}>h</td>
               </tr>
               <tr>
                 <td className="is-number" onClick={() => addCharacter('7')}>7</td>
                 <td className="is-number" onClick={() => addCharacter('8')}>8</td>
                 <td className="is-number" onClick={() => addCharacter('9')}>9</td>
-                <td className="is-operation" onClick={() => addCharacter('m ')}>m</td>
+                <td className="is-operation" onClick={() => addCharacter('m')}>m</td>
               </tr>
               <tr>
+                <td className="is-operation" onClick={() => addCharacter('+')}>+</td>
                 <td className="is-number" onClick={() => addCharacter('0')}>0</td>
-                <td className="is-operation" onClick={() => addCharacter('+ ')}>+</td>
-                <td className="is-operation" onClick={() => addCharacter('- ')}>-</td>
-                <td className="is-operation" onClick={() => addCharacter('s ')}>s</td>
+                <td className="is-operation" onClick={() => addCharacter('-')}>-</td>
+                <td className="is-operation" onClick={() => addCharacter('s')}>s</td>
+              </tr>
+              <tr>
+                <td className="is-operation" onClick={() => addCharacter('*')}>*</td>
+                <td className="is-operation" onClick={() => addCharacter('/')}>/</td>
+                <td className="is-operation" onClick={() => addCharacter('(')}>(</td>
+                <td className="is-operation" onClick={() => addCharacter(')')}>)</td>
               </tr>
               <tr>
                 <td className="is-command" colSpan={3} onClick={submitCalcInput}>Submit</td>
@@ -134,9 +133,12 @@ export default function Calculator() {
         </form>
       </div>
       <div className={`history-frame ${showHistory ? 'should-show-history' : ''}`}>
-        <History equationsHistory={history} />
+        <History setHistInput={(selectedHist: string) => setCalcInput(selectedHist)} equationsHistory={history} />
       </div>
-      <span className={`error-popup ${errorInput ? 'should-show-error' : ''}`}>sentence <span className="error-string">{errorInput}</span> is not supported</span>
+      <span
+        className={`error-popup ${errorInput ? 'should-show-error' : ''}`}
+      >sentence <span className="error-string">{errorInput}</span> is not supported
+      </span>
     </div>
   );
 }

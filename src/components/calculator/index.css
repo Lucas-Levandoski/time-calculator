@@ -22,7 +22,9 @@ svg {
   padding: 10px;
   height: 150px;
   border-radius: 7px;
-  border: 2px solid #8EB1BC;
+  border: 2px solid var(--number-button);
+  background-color: var(--text-input);
+  color: var(--text-input-font);
 }
 
 .error-popup {
@@ -58,15 +60,15 @@ table.calc-keyboard {
 }
 
 .is-number {
-  background-color: #8EB1BC;
+  background-color: var(--number-button);
 }
 
 .is-operation {
-  background-color: #CADBE1;
+  background-color: var(--operation-button);
 }
 
 .is-command {
-  background-color: #A58EBC;
+  background-color: var(--submit-button);
 }
 
 .result-type-list {
@@ -77,8 +79,9 @@ table.calc-keyboard {
 .result-type-list span {
   width: 100%;
   margin: 2px;
-  background-color: #CADBE1;
+  background-color: var(--operation-button);
   border-radius: 20px;
+  cursor: pointer;
 }
 
 .result-type-list input {

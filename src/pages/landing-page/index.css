@@ -1,6 +1,9 @@
 .landing-page {
+  transition-property: color, background-color;
+  transition-duration: 1s;
+  transition-timing-function: ease-in-out;
   min-height: 100vh;
-  /* background-color: black; */
+  background-color: var(--background);
 }
 
 .calc-frame {
@@ -9,4 +12,47 @@
   width: 100vw;
   align-items: center;
   justify-content: center;
+}
+
+.mode-button {
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  background-color: transparent;
+  border: none;
+}
+
+.mode-button:focus {
+  outline: none;
+}
+
+.light-mode-icon {
+  color: #E8C575;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.dark-mode-icon {
+  color: #A58EBC;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.light-mode {
+  --background: white;
+  --number-button: #8EB1BC;
+  --operation-button: #CADBE1;
+  --submit-button: #A58EBC;
+  --text-input: white;
+  --text-input-font: black;
+}
+
+.dark-mode {
+  color: white;
+  --background: rgba(0, 0, 0, 0.959);
+  --number-button: #085373;
+  --operation-button: #038387;
+  --submit-button: #e16038;
+  --text-input: #292929;
+  --text-input-font: white;
 }

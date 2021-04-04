@@ -15,12 +15,15 @@
 
 .history-table tr {
   padding: 10px;
-  height: 80px;
+  height: 88px;
 }
 
 .history-table p {
   cursor: pointer;
   padding: 3px;
+  max-width: 300px;
+  line-break: anywhere;
+  border: solid 2px transparent;
 }
 
 .equation-box {
@@ -35,13 +38,13 @@
 
 .history-table p:hover {
   border-radius: 5px;
-  border: solid 2px blueviolet;
+  border-color: var(--submit-button);
 }
 
 .history-table tr:nth-child(odd) td {
-  background-color: #CADBE1;
+  background-color: var(--operation-button);
 }
 
 .history-table tr:nth-child(even) td {
-  background-color: #8EB1BC;
+  background-color: var(--number-button);
 }
