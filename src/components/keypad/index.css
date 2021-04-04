@@ -1,0 +1,11 @@
+.is-number {
+  background-color: var(--number-button);
+}
+
+.is-operation {
+  background-color: var(--operation-button);
+}
+
+.is-command {
+  background-color: var(--submit-button);
+}

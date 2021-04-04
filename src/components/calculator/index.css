@@ -5,9 +5,6 @@
   align-items: center;
 }
 
-svg {
-  font-size: 20px;
-}
 .calc-form {
   margin: auto;
   display: flex;
@@ -15,6 +12,7 @@ svg {
   justify-content: center;
   text-align: center;
   min-width: 400px;
+  position: relative;
 }
 
 .calc-input {
@@ -38,6 +36,14 @@ svg {
   background-color: #F3BBBE;
 }
 
+.keypad-button {
+  width: 60px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 25px;
+  cursor: pointer;
+}
+
 .should-show-error {
   opacity: 1;
 }
@@ -47,28 +53,8 @@ svg {
   font-weight: bold;
 }
 
-table.calc-keyboard {
+table.calc-input-board {
   width: 100%;
-}
-
-.calc-keyboard td {
-  width: 60px;
-  padding: 10px;
-  border-radius: 10px;
-  font-size: 25px;
-  cursor: pointer;
-}
-
-.is-number {
-  background-color: var(--number-button);
-}
-
-.is-operation {
-  background-color: var(--operation-button);
-}
-
-.is-command {
-  background-color: var(--submit-button);
 }
 
 .result-type-list {
@@ -99,4 +85,42 @@ table.calc-keyboard {
 
 .should-show-history {
   width: 100%;
+}
+
+.nav-bar {
+  position: absolute;
+  display: flex;
+  left: 0;
+  bottom: 175px;
+  transform: rotate(270deg) translateY(-155px);
+  max-width: 273px;
+  min-width: 273px;
+}
+
+.nav-bar button {
+  transition-property: color, background-color;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in-out;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  color: var(--text-input-font);
+  font-size: 14px;
+}
+
+.nav-bar button:first-child {
+  border-radius: 15px 0 0 0;
+}
+
+.nav-bar button:last-child {
+  border-radius: 0 15px 0 0;
+}
+
+.nav-bar .selected-button {
+  background-color: var(--nav-selected-button);
+}
+
+.nav-bar .unselected-button {
+  background-color: var(--nav-unselected-button);
+  cursor: pointer;
 }

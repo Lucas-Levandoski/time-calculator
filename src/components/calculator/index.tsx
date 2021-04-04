@@ -3,18 +3,21 @@ import { FaHistory } from 'react-icons/fa';
 import {
   SecondsToDays, SecondsToHours, SecondsToMinutes, SecondsToSeconds,
 } from '../../functions/seconds-to';
-import EquationToSeconds, { EquationToSeconds2 } from '../../functions/equation-to-seconds';
+import EquationToSeconds from '../../functions/equation-to-seconds';
 import ValidateInput from '../../functions/validate-input';
 import History, { IEquation } from '../history';
 
 import './index.css';
+import Keypad from '../keypad';
+import DatePicker from '../date-picker/index';
 
 export default function Calculator() {
   const [calcInput, setCalcInput] = useState('');
-  const [resultType, setResultType] = useState('hours');
+  const [resultType, setResultType] = useState('days');
   const [errorInput, setErrorInput] = useState(null);
   const [showHistory, setShowHistory] = useState(false);
   const [history, setHistory] = useState<IEquation[]>([]);
+  const [keypadType, setKeypadType] = useState('calc');
 
   const addEquationToHistory = (equation: string, result: string) => {
     if (history.length === 6) {
@@ -69,6 +72,10 @@ export default function Calculator() {
     setCalcInput(calcInput + character);
   };
 
+  const backspaceCommand = () => {
+    setCalcInput(calcInput.substr(0, calcInput.length - 1));
+  };
+
   return (
     <div className="calc-container">
       <div>
@@ -92,44 +99,34 @@ export default function Calculator() {
               <input type="radio" value="seconds" name="timeType" checked={resultType === 'seconds'} /> in secs
             </span>
           </div>
-          <table className="calc-keyboard">
+          <table className="calc-input-board">
             <tbody>
+              {
+              keypadType === 'calc'
+                ? <Keypad addCharacter={(character: string) => addCharacter(character)} />
+                : <DatePicker />
+                }
               <tr>
-                <td className="is-number" onClick={() => addCharacter('1')}>1</td>
-                <td className="is-number" onClick={() => addCharacter('2')}>2</td>
-                <td className="is-number" onClick={() => addCharacter('3')}>3</td>
-                <td className="is-operation" onClick={() => addCharacter('d')}>d</td>
-              </tr>
-              <tr>
-                <td className="is-number" onClick={() => addCharacter('4')}>4</td>
-                <td className="is-number" onClick={() => addCharacter('5')}>5</td>
-                <td className="is-number" onClick={() => addCharacter('6')}>6</td>
-                <td className="is-operation" onClick={() => addCharacter('h')}>h</td>
-              </tr>
-              <tr>
-                <td className="is-number" onClick={() => addCharacter('7')}>7</td>
-                <td className="is-number" onClick={() => addCharacter('8')}>8</td>
-                <td className="is-number" onClick={() => addCharacter('9')}>9</td>
-                <td className="is-operation" onClick={() => addCharacter('m')}>m</td>
-              </tr>
-              <tr>
-                <td className="is-operation" onClick={() => addCharacter('+')}>+</td>
-                <td className="is-number" onClick={() => addCharacter('0')}>0</td>
-                <td className="is-operation" onClick={() => addCharacter('-')}>-</td>
-                <td className="is-operation" onClick={() => addCharacter('s')}>s</td>
-              </tr>
-              <tr>
-                <td className="is-operation" onClick={() => addCharacter('*')}>*</td>
-                <td className="is-operation" onClick={() => addCharacter('/')}>/</td>
-                <td className="is-operation" onClick={() => addCharacter('(')}>(</td>
-                <td className="is-operation" onClick={() => addCharacter(')')}>)</td>
-              </tr>
-              <tr>
-                <td className="is-command" colSpan={3} onClick={submitCalcInput}>Submit</td>
-                <td className="is-command" onClick={() => setShowHistory(!showHistory)}><FaHistory /></td>
+                <td className="keypad-button is-command" colSpan={2} onClick={submitCalcInput}>Submit</td>
+                <td className="keypad-button is-command" onClick={() => backspaceCommand()}>C</td>
+                <td className="keypad-button is-command" onClick={() => setShowHistory(!showHistory)}><FaHistory /></td>
               </tr>
             </tbody>
           </table>
+          <div className="nav-bar">
+            <button
+              type="button"
+              className={`nav-button ${keypadType === 'calc' ? 'selected-button' : 'unselected-button'}`}
+              onClick={() => setKeypadType('calc')}
+            >Calculator
+            </button>
+            <button
+              type="button"
+              className={`nav-button ${keypadType === 'dateBetween' ? 'selected-button' : 'unselected-button'}`}
+              onClick={() => setKeypadType('dateBetween')}
+            >Time in between
+            </button>
+          </div>
         </form>
       </div>
       <div className={`history-frame ${showHistory ? 'should-show-history' : ''}`}>
