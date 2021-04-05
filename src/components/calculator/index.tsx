@@ -113,7 +113,7 @@ export default function Calculator() {
               </tr>
             </tbody>
           </table>
-          <div className="nav-bar">
+          {/* <div className="nav-bar">
             <button
               type="button"
               className={`nav-button ${keypadType === 'calc' ? 'selected-button' : 'unselected-button'}`}
@@ -126,7 +126,7 @@ export default function Calculator() {
               onClick={() => setKeypadType('dateBetween')}
             >Time in between
             </button>
-          </div>
+          </div> */}
         </form>
       </div>
       <div className={`history-frame ${showHistory ? 'should-show-history' : ''}`}>

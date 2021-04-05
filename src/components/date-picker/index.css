@@ -1,3 +1,13 @@
-.date-picker-container {
+.date-time-picker-frame {
   height: 273px;
+}
+
+.date-pickers-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.date-picker-container {
+  margin: 10px
 }

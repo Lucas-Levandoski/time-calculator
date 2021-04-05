@@ -41,5 +41,7 @@ export default function EquationToSeconds(equation: string) {
   equationToRun = equationToRun.replaceAll('m', '*60');
   equationToRun = equationToRun.replaceAll('s', '*1');
 
-  return math.evaluate(equationToRun);
+  console.log(math.evaluate(equationToRun));
+
+  return Math.round(math.evaluate(equationToRun));
 }
