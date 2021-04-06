@@ -1,27 +1,7 @@
 export const operationChars: string[] = ['+', '-', '*', '/', '(', ')'];
 export const timeChars: string[] = ['d', 'h', 'm', 's'];
 
-// export function ValidateInput(equation: string) {
-//   let mistakenOperation;
-
-//   const operations = equation.split('');
-
-//   operations.every((operation) => {
-//     const operationChar = operation;
-//     const valueIsNan = Number.isNaN(+operation);
-
-//     if (valueIsNan && !operationChars.includes(operationChar) && !timeChars.includes(operationChar)) {
-//       mistakenOperation = operation;
-//       return false;
-//     }
-
-//     return true;
-//   });
-
-//   return mistakenOperation || null;
-// }
-
-export function CheckDuplications(TimeString: string) {
+function CheckDuplications(TimeString: string) {
   const chars = TimeString.split('');
   let hasDuplicates = null;
 
@@ -38,6 +18,55 @@ export function CheckDuplications(TimeString: string) {
   return hasDuplicates;
 }
 
+function CheckCharacterAcceptance(equation: string) {
+  let hasInvalidChar = null;
+
+  const chars = equation.split('');
+
+  chars.forEach((char, index) => {
+    if (!operationChars.includes(char) && !timeChars.includes(char) && !+char && char !== '0') {
+      hasInvalidChar = char;
+    }
+  });
+
+  return hasInvalidChar;
+}
+
+function CheckTimeUnityHasNumber(equation: string) {
+  let hasInvalidChar = null;
+
+  // check if it is a operation
+  if (operationChars.includes(equation)) { return null; }
+
+  const chars = equation.split('');
+
+  chars.forEach((char, index) => {
+    if (!+char && !+chars[index - 1] && chars[index - 1] !== '0' && char !== '0') {
+      hasInvalidChar = char;
+    }
+  });
+
+  return hasInvalidChar;
+}
+
+function CheckLastCharIsNumber(equation: string) {
+  let lastCharIsNumber = null;
+
+  // check if it is actually a number
+  if (+equation) { return null; }
+
+  // check if it is a operation
+  if (operationChars.includes(equation)) { return null; }
+
+  const chars = equation.split('');
+
+  if (+chars[chars.length - 1]) {
+    lastCharIsNumber = +chars[chars.length - 1];
+  }
+
+  return lastCharIsNumber;
+}
+
 export default function ValidateInput(equations: string[]) {
   let errorMessage = null;
 
@@ -50,11 +79,26 @@ export default function ValidateInput(equations: string[]) {
       return false;
     }
 
-    equation.split('').forEach((char) => {
-      if (!operationChars.includes(char) && !timeChars.includes(char) && !+char && char !== '0') {
-        errorMessage = `character (${char}) on sentence (${equation}) is not accepted`;
-      }
-    });
+    const hasInvalidChar = CheckCharacterAcceptance(equation);
+
+    if (hasInvalidChar) {
+      errorMessage = `character (${hasInvalidChar}) on sentence (${equation}) is not accepted`;
+      return false;
+    }
+
+    const hasNumberBefore = CheckTimeUnityHasNumber(equation);
+
+    if (hasNumberBefore) {
+      errorMessage = `your sentence (${equation}) does not have a number before (${hasNumberBefore})`;
+      return false;
+    }
+
+    const lasCharIsNumber = CheckLastCharIsNumber(equation);
+
+    if (lasCharIsNumber) {
+      errorMessage = `last character on (${equation}) must be a time type like (d, h, m or s) instead of ${lasCharIsNumber}`;
+      return false;
+    }
 
     return true;
   });

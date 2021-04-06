@@ -13,7 +13,7 @@
   transition-timing-function: ease-in-out;
 
 
-
+  touch-action: manipulation;
   min-height: 100vh;
   background-color: var(--background);
 }

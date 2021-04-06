@@ -35,17 +35,14 @@ export default function Calculator() {
   const submitCalcInput = (e: any) => {
     e.preventDefault();
 
-    // check if calc input is empty
     if (!calcInput) {
       setErrorMessage('you should type something');
       return;
     }
 
     const splitedEquation = SplitEquation(calcInput);
-
     const error = ValidateInput(splitedEquation);
 
-    // check if input has any error
     if (error) {
       setErrorMessage(error);
       return;
@@ -54,13 +51,12 @@ export default function Calculator() {
     setErrorMessage('');
 
     const result = SecondsTo(splitedEquation, resultType);
-
     addEquationToHistory(calcInput, result);
     setCalcInput(result);
   };
 
-  const backspaceCommand = () => {
-    setCalcInput(calcInput.substr(0, calcInput.length - 1));
+  const clearCommand = () => {
+    setCalcInput('');
   };
 
   return (
@@ -95,7 +91,7 @@ export default function Calculator() {
                 }
               <tr>
                 <td className="keypad-button is-command" colSpan={2} onClick={submitCalcInput}>Submit</td>
-                <td className="keypad-button is-command" onClick={() => backspaceCommand()}>C</td>
+                <td className="keypad-button is-command" onClick={() => clearCommand()}>C</td>
                 <td className="keypad-button is-command" onClick={() => setShowHistory(!showHistory)}><FaHistory /></td>
               </tr>
             </tbody>
