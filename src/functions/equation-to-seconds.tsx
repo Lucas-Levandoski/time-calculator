@@ -1,5 +1,4 @@
 import * as math from 'mathjs';
-import SplitEquation from './split-equation';
 import { operationChars } from './validate-input';
 
 function TimeStringToNumber(timeString: string) {

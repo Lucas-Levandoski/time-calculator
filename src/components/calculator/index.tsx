@@ -35,6 +35,7 @@ export default function Calculator() {
   const submitCalcInput = (e: any) => {
     e.preventDefault();
 
+    // check if calc input is empty
     if (!calcInput) {
       setErrorMessage('you should type something');
       return;
@@ -44,6 +45,7 @@ export default function Calculator() {
 
     const error = ValidateInput(splitedEquation);
 
+    // check if input has any error
     if (error) {
       setErrorMessage(error);
       return;
