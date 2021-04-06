@@ -1,23 +1,26 @@
 import React, { useState } from 'react';
 import { FaHistory } from 'react-icons/fa';
-import {
-  SecondsToDays, SecondsToHours, SecondsToMinutes, SecondsToSeconds,
-} from '../../functions/seconds-to';
-import EquationToSeconds from '../../functions/equation-to-seconds';
+
+import { ReturnTypes, KeypadTypes } from '../../enums/index';
+
+import SecondsTo from '../../functions/seconds-to';
 import ValidateInput from '../../functions/validate-input';
-import History, { IEquation } from '../history';
+import SplitEquation from '../../functions/split-equation';
+
+import { IEquation } from '../../interfaces';
 
 import './index.css';
+import History from '../history';
 import Keypad from '../keypad';
 import DatePicker from '../date-picker/index';
 
 export default function Calculator() {
-  const [calcInput, setCalcInput] = useState('');
-  const [resultType, setResultType] = useState('days');
-  const [errorInput, setErrorInput] = useState(null);
-  const [showHistory, setShowHistory] = useState(false);
+  const [calcInput, setCalcInput] = useState<string>('');
+  const [resultType, setResultType] = useState<ReturnTypes>(ReturnTypes.days);
+  const [errorMessage, setErrorMessage] = useState<string>();
+  const [showHistory, setShowHistory] = useState<boolean>(false);
   const [history, setHistory] = useState<IEquation[]>([]);
-  const [keypadType, setKeypadType] = useState('calc');
+  const [keypadType, setKeypadType] = useState<KeypadTypes>(KeypadTypes.calc);
 
   const addEquationToHistory = (equation: string, result: string) => {
     if (history.length === 6) {
@@ -29,47 +32,29 @@ export default function Calculator() {
     setHistory(history);
   };
 
-  const executeOperations = (equation: string) => {
-    const hasError = ValidateInput(equation);
-
-    if (!hasError && equation.length > 0) {
-      setErrorInput(null);
-
-      const totalSeconds = EquationToSeconds(equation);
-
-      let result = '';
-
-      switch (resultType) {
-        case 'days':
-          result = SecondsToDays(totalSeconds);
-          break;
-        case 'hours':
-          result = SecondsToHours(totalSeconds);
-          break;
-        case 'minutes':
-          result = SecondsToMinutes(totalSeconds);
-          break;
-        case 'seconds':
-          result = SecondsToSeconds(totalSeconds);
-          break;
-        default:
-      }
-
-      addEquationToHistory(calcInput, result);
-      setCalcInput(result);
-    } else {
-      setErrorInput(hasError);
-    }
-  };
-
   const submitCalcInput = (e: any) => {
     e.preventDefault();
 
-    executeOperations(calcInput);
-  };
+    if (!calcInput) {
+      setErrorMessage('you should type something');
+      return;
+    }
 
-  const addCharacter = (character: string) => {
-    setCalcInput(calcInput + character);
+    const splitedEquation = SplitEquation(calcInput);
+
+    const error = ValidateInput(splitedEquation);
+
+    if (error) {
+      setErrorMessage(error);
+      return;
+    }
+
+    setErrorMessage('');
+
+    const result = SecondsTo(splitedEquation, resultType);
+
+    addEquationToHistory(calcInput, result);
+    setCalcInput(result);
   };
 
   const backspaceCommand = () => {
@@ -86,24 +71,24 @@ export default function Calculator() {
             onChange={(e) => setCalcInput(e.target.value)}
           />
           <div className="result-type-list">
-            <span onClick={() => setResultType('days')}>
-              <input type="radio" value="days" name="timeType" checked={resultType === 'days'} /> in days
+            <span onClick={() => setResultType(ReturnTypes.days)}>
+              <input type="radio" value={ReturnTypes.days} name="timeType" checked={resultType === ReturnTypes.days} /> in days
             </span>
-            <span onClick={() => setResultType('hours')}>
-              <input type="radio" value="hours" name="timeType" checked={resultType === 'hours'} /> in hours
+            <span onClick={() => setResultType(ReturnTypes.hours)}>
+              <input type="radio" value={ReturnTypes.hours} name="timeType" checked={resultType === ReturnTypes.hours} /> in hours
             </span>
-            <span onClick={() => setResultType('minutes')}>
-              <input type="radio" value="minutes" name="timeType" checked={resultType === 'minutes'} /> in mins
+            <span onClick={() => setResultType(ReturnTypes.minutes)}>
+              <input type="radio" value={ReturnTypes.minutes} name="timeType" checked={resultType === ReturnTypes.minutes} /> in mins
             </span>
-            <span onClick={() => setResultType('seconds')}>
-              <input type="radio" value="seconds" name="timeType" checked={resultType === 'seconds'} /> in secs
+            <span onClick={() => setResultType(ReturnTypes.seconds)}>
+              <input type="radio" value={ReturnTypes.seconds} name="timeType" checked={resultType === ReturnTypes.seconds} /> in secs
             </span>
           </div>
           <table className="calc-input-board">
             <tbody>
               {
               keypadType === 'calc'
-                ? <Keypad addCharacter={(character: string) => addCharacter(character)} />
+                ? <Keypad addCharacter={(character: string) => setCalcInput(calcInput + character)} />
                 : <DatePicker />
                 }
               <tr>
@@ -116,14 +101,14 @@ export default function Calculator() {
           {/* <div className="nav-bar">
             <button
               type="button"
-              className={`nav-button ${keypadType === 'calc' ? 'selected-button' : 'unselected-button'}`}
-              onClick={() => setKeypadType('calc')}
+              className={`nav-button ${keypadType === KeypadTypes.calc ? 'selected-button' : 'unselected-button'}`}
+              onClick={() => setKeypadType(KeypadTypes.calc)}
             >Calculator
             </button>
             <button
               type="button"
-              className={`nav-button ${keypadType === 'dateBetween' ? 'selected-button' : 'unselected-button'}`}
-              onClick={() => setKeypadType('dateBetween')}
+              className={`nav-button ${keypadType === KeypadTypes.timeInBetween ? 'selected-button' : 'unselected-button'}`}
+              onClick={() => setKeypadType(KeypadTypes.timeInBetween)}
             >Time in between
             </button>
           </div> */}
@@ -133,8 +118,8 @@ export default function Calculator() {
         <History setHistInput={(selectedHist: string) => setCalcInput(selectedHist)} equationsHistory={history} />
       </div>
       <span
-        className={`error-popup ${errorInput ? 'should-show-error' : ''}`}
-      >sentence <span className="error-string">{errorInput}</span> is not supported
+        className={`error-popup ${errorMessage ? 'should-show-error' : ''}`}
+      >{errorMessage}
       </span>
     </div>
   );

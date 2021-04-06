@@ -1,47 +1,30 @@
 import * as math from 'mathjs';
+import SplitEquation from './split-equation';
+import { operationChars } from './validate-input';
 
-export function EquationToSeconds2(operations: string[]) {
-  let record = '(';
-  let equation = '';
+function TimeStringToNumber(timeString: string) {
+  let result = timeString;
 
-  operations.forEach((operation) => {
-    const operationChar = operation.substring(operation.length - 1, operation.length);
-    const value = +operation.substring(0, operation.length - 1);
+  if (+result) {
+    return math.evaluate(result);
+  }
 
-    switch (operationChar) {
-      case 'd':
-        record += ` +${value * 86400} `;
-        break;
-      case 'h':
-        record += ` +${value * 3600} `;
-        break;
-      case 'm':
-        record += ` +${value * 60} `;
-        break;
-      case 's':
-        record += ` +${value} `;
-        break;
-      default:
-        equation += ` ${record}) ${operationChar} `;
-        record = '(';
-        break;
+  result = result.replaceAll('d', '*86400+');
+  result = result.replaceAll('h', '*3600+');
+  result = result.replaceAll('m', '*60+');
+  result = result.replaceAll('s', '*1+');
+
+  return math.evaluate(result.substr(0, result.length - 1));
+}
+
+export default function EquationToSeconds(splitedEquations: string[]) {
+  const splitedEquation = splitedEquations;
+
+  splitedEquation.forEach((item, index) => {
+    if (!operationChars.includes(item)) {
+      splitedEquation[index] = TimeStringToNumber(item);
     }
   });
 
-  equation += `${record})`;
-
-  return math.evaluate(equation);
-}
-
-export default function EquationToSeconds(equation: string) {
-  let equationToRun = equation;
-
-  equationToRun = equationToRun.replaceAll('d', '*86400');
-  equationToRun = equationToRun.replaceAll('h', '*3600');
-  equationToRun = equationToRun.replaceAll('m', '*60');
-  equationToRun = equationToRun.replaceAll('s', '*1');
-
-  console.log(math.evaluate(equationToRun));
-
-  return Math.round(math.evaluate(equationToRun));
+  return Math.round(math.evaluate(splitedEquation.join('')));
 }

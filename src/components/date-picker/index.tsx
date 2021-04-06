@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import DatePickerInput from 'react-date-picker';
 import TimePickerInput from 'react-time-picker';
-import { SecondsToHours } from '../../functions/seconds-to';
 
 import './index.css';
 
@@ -14,7 +13,7 @@ export default function DatePicker(props: any) {
     const start = startDate.getTime() / 1000;
     const end = endDate.getTime() / 1000;
 
-    setResult(SecondsToHours(end - start));
+    // setResult(SecondsToHours(end - start));
   };
 
   const startDateHandle = (date: any) => {

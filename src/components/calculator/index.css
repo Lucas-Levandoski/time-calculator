@@ -32,11 +32,21 @@
   transition: all 0.5s;
   opacity: 0;
   position: absolute;
-  left: 150px;
+  left: 50%;
+  top: -50px;
+  height: 25px;
+  transform: translateX(-50%);
   border: 3px solid #FF869C;
   border-radius: 5px;
   padding: 10px;
   background-color: #F3BBBE;
+  color: red;
+  font-weight: bold;
+}
+
+.should-show-error {
+  opacity: 1;
+  top: 30px;
 }
 
 .keypad-button {
@@ -45,15 +55,6 @@
   border-radius: 10px;
   font-size: 25px;
   cursor: pointer;
-}
-
-.should-show-error {
-  opacity: 1;
-}
-
-.error-string {
-  color: red;
-  font-weight: bold;
 }
 
 table.calc-input-board {
