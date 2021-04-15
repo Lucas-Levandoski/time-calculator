@@ -20,10 +20,35 @@
 
 .calc-frame {
   display: flex;
-  height: 100vh;
-  width: 100vw;
+  height: calc(100vh - 15px);
+  width: 100%;
   align-items: center;
   justify-content: center;
+}
+
+.page-separator {
+  height: 25px;
+  background-image: linear-gradient(var(--background), var(--page-separator));
+}
+
+/* command buttons floating on top right corner */
+
+button:focus {
+  outline: none;
+}
+
+.help-button {
+  position: absolute;
+  right: 30px;
+  top: 80px;
+  background-color: transparent;
+  border: none;
+}
+
+.help-icon {
+  color: var(--text-input-font);
+  font-size: 30px;
+  cursor: pointer;
 }
 
 .mode-button {
@@ -32,10 +57,6 @@
   top: 30px;
   background-color: transparent;
   border: none;
-}
-
-button:focus {
-  outline: none;
 }
 
 .light-mode-icon {
@@ -50,25 +71,28 @@ button:focus {
   cursor: pointer;
 }
 
+/* light and dark mode global variables */
 .light-mode {
   --background: white;
   --number-button: #8EB1BC;
   --operation-button: #CADBE1;
   --submit-button: #A58EBC;
-  --text-input: white;
-  --text-input-font: black;
-  --nav-selected-button: rgb(249, 193, 193);
-  --nav-unselected-button: rgb(213, 197, 197);
+  --text-input: #e3f7ff;
+  --text-input-font: #222121;
+  --nav-selected-button: #f9c1c1;
+  --nav-unselected-button: #d5c5c5;
+  --page-separator: #222121;
 }
 
 .dark-mode {
   color: white;
-  --background: rgba(0, 0, 0, 0.959);
+  --background: #222121;
   --number-button: #085373;
   --operation-button: #038387;
   --submit-button: #e16038;
-  --text-input: #292929;
+  --text-input: #353535;
   --text-input-font: white;
-  --nav-selected-button: rgb(236, 160, 160);
-  --nav-unselected-button: rgb(173, 118, 118);
+  --nav-selected-button: #eca0a0;
+  --nav-unselected-button: #ad7676;
+  --page-separator: #fffff1;
 }

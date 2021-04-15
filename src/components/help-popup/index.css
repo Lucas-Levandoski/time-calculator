@@ -1,0 +1,27 @@
+.help-popup-container {
+  margin: 15px;
+  text-align: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  display: block;
+  width: 500px;
+  transition: all 1s ease-in-out;
+  border-radius: 10px;
+  background-color: var(--text-input);
+}
+
+.hide-help {
+  width: 0;
+  overflow: hidden;
+}
+
+.show-help {
+  width: 500px;
+  overflow: hidden;
+}
+
+.help-content {
+  display: block;
+  width: 500px;
+}

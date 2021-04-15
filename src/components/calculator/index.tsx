@@ -19,8 +19,8 @@ export default function Calculator() {
   const [resultType, setResultType] = useState<ReturnTypes>(ReturnTypes.days);
   const [errorMessage, setErrorMessage] = useState<string>();
   const [showHistory, setShowHistory] = useState<boolean>(false);
-  const [history, setHistory] = useState<IEquation[]>([]);
   const [keypadType, setKeypadType] = useState<KeypadTypes>(KeypadTypes.calc);
+  const [history, setHistory] = useState<IEquation[]>([]);
 
   const addEquationToHistory = (equation: string, result: string) => {
     if (history.length === 6) {
@@ -113,7 +113,7 @@ export default function Calculator() {
         </form>
       </div>
       <div className={`history-frame ${showHistory ? 'should-show-history' : ''}`}>
-        <History setHistInput={(selectedHist: string) => setCalcInput(selectedHist)} equationsHistory={history} />
+        <History setHistInput={(selectedHist: string) => setCalcInput(selectedHist)} equationHistory={history} />
       </div>
       <span
         className={`error-popup ${errorMessage ? 'should-show-error' : ''}`}

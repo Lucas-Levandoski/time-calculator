@@ -27,10 +27,6 @@
     "react",
     "@typescript-eslint"
   ],
-  // "import/no-extraneous-dependencies": [
-  //   "error", 
-  //   {"devDependencies": true}
-  // ],
   "rules": {   
     "max-len":  ["error", { "code": 160 }],
     "react/jsx-one-expression-per-line": [0, { "allow": "single"}],    

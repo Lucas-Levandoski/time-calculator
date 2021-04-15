@@ -9,7 +9,7 @@ export default function History(props: any) {
 
   return (
     <div className="history-container">
-      {/* <table cellSpacing={0} className="history-table">
+      <table cellSpacing={0} className="history-table">
         <tbody>
           <tr>
             <td>
@@ -79,7 +79,7 @@ export default function History(props: any) {
             </td>
           </tr>
         </tbody>
-      </table> */}
+      </table>
     </div>
   );
 }

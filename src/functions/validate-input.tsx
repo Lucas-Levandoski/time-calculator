@@ -23,7 +23,7 @@ function CheckCharacterAcceptance(equation: string) {
 
   const chars = equation.split('');
 
-  chars.forEach((char, index) => {
+  chars.forEach((char) => {
     if (!operationChars.includes(char) && !timeChars.includes(char) && !+char && char !== '0') {
       hasInvalidChar = char;
     }
@@ -86,10 +86,10 @@ export default function ValidateInput(equations: string[]) {
       return false;
     }
 
-    const hasNumberBefore = CheckTimeUnityHasNumber(equation);
+    const timeUnityMissingNumber = CheckTimeUnityHasNumber(equation);
 
-    if (hasNumberBefore) {
-      errorMessage = `your sentence (${equation}) does not have a number before (${hasNumberBefore})`;
+    if (timeUnityMissingNumber) {
+      errorMessage = `your sentence (${equation}) does not have a number before (${timeUnityMissingNumber})`;
       return false;
     }
 
