@@ -72,7 +72,6 @@ table.calc-input-board {
   width: 100%;
   height: 40px;
   margin: 2px;
-  background-color: var(--operation-button);
   border-radius: 6px;
   cursor: pointer;
   display: flex;

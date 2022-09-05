@@ -9,3 +9,7 @@
 .is-command {
   background-color: var(--submit-button);
 }
+
+.is-result-type {
+  background-color: var(--result-type-button);
+}

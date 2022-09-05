@@ -69,17 +69,17 @@ export default function Calculator() {
             onChange={(e) => setCalcInput(e.target.value)}
           />
           <div className="result-type-list">
-            <span onClick={() => setResultType(ReturnTypes.days)}>
-              <input type="radio" value={ReturnTypes.days} name="timeType" checked={resultType === ReturnTypes.days} /> in days
+            <span onClick={() => setResultType(ReturnTypes.days)} className="is-result-type">
+              in days
             </span>
-            <span onClick={() => setResultType(ReturnTypes.hours)}>
-              <input type="radio" value={ReturnTypes.hours} name="timeType" checked={resultType === ReturnTypes.hours} /> in hours
+            <span onClick={() => setResultType(ReturnTypes.hours)} className="is-result-type">
+              in hours
             </span>
-            <span onClick={() => setResultType(ReturnTypes.minutes)}>
-              <input type="radio" value={ReturnTypes.minutes} name="timeType" checked={resultType === ReturnTypes.minutes} /> in mins
+            <span onClick={() => setResultType(ReturnTypes.minutes)} className="is-result-type">
+              in mins
             </span>
-            <span onClick={() => setResultType(ReturnTypes.seconds)}>
-              <input type="radio" value={ReturnTypes.seconds} name="timeType" checked={resultType === ReturnTypes.seconds} /> in secs
+            <span onClick={() => setResultType(ReturnTypes.seconds)} className="is-result-type">
+              in secs
             </span>
           </div>
           <table className="calc-input-board">
