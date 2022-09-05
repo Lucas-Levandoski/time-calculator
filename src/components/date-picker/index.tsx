@@ -4,14 +4,15 @@ import TimePickerInput from 'react-time-picker';
 
 import './index.css';
 
-export default function DatePicker(props: any) {
+export default function DatePicker() {
   const [startDate, setStartDate] = useState<Date>(new Date());
   const [endDate, setEndDate] = useState<Date>(new Date());
   const [result, setResult] = useState('');
 
   const calculateTime = () => {
-    const start = startDate.getTime() / 1000;
-    const end = endDate.getTime() / 1000;
+    setResult('');
+    // const start = startDate.getTime() / 1000;
+    // const end = endDate.getTime() / 1000;
 
     // setResult(SecondsToHours(end - start));
   };

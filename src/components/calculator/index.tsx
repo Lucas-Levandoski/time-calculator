@@ -75,13 +75,22 @@ export default function Calculator() {
             >
               in days
             </span>
-            <span onClick={() => setResultType(ReturnTypes.hours)} className="is-result-type">
+            <span
+              onClick={() => setResultType(ReturnTypes.hours)}
+              className={resultType === ReturnTypes.hours ? 'is-selected-result-type' : 'is-result-type'}
+            >
               in hours
             </span>
-            <span onClick={() => setResultType(ReturnTypes.minutes)} className="is-result-type">
+            <span
+              onClick={() => setResultType(ReturnTypes.minutes)}
+              className={resultType === ReturnTypes.minutes ? 'is-selected-result-type' : 'is-result-type'}
+            >
               in mins
             </span>
-            <span onClick={() => setResultType(ReturnTypes.seconds)} className="is-result-type">
+            <span
+              onClick={() => setResultType(ReturnTypes.seconds)}
+              className={resultType === ReturnTypes.seconds ? 'is-selected-result-type' : 'is-result-type'}
+            >
               in secs
             </span>
           </div>
