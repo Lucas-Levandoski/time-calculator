@@ -97,6 +97,5 @@ button:focus {
   --nav-unselected-button: #ad7676;
   --page-separator: #fffff1;
   --result-type-button: #937CE6;
-
-
+  --selected-result-type-button: #6344D4;
 }

@@ -69,7 +69,10 @@ export default function Calculator() {
             onChange={(e) => setCalcInput(e.target.value)}
           />
           <div className="result-type-list">
-            <span onClick={() => setResultType(ReturnTypes.days)} className="is-result-type">
+            <span
+              onClick={() => setResultType(ReturnTypes.days)}
+              className={resultType === ReturnTypes.days ? 'is-selected-result-type' : 'is-result-type'}
+            >
               in days
             </span>
             <span onClick={() => setResultType(ReturnTypes.hours)} className="is-result-type">

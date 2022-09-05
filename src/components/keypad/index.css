@@ -13,3 +13,7 @@
 .is-result-type {
   background-color: var(--result-type-button);
 }
+
+.is-selected-result-type {
+  background-color: var(--selected-result-type-button);
+}
