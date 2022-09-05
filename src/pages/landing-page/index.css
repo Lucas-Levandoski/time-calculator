@@ -86,13 +86,14 @@ button:focus {
 
 .dark-mode {
   color: white;
-  --background: #222121;
-  --number-button: #085373;
-  --operation-button: #038387;
+  --background: #212A35;
+  --number-button: #171C22;
+  --operation-button: #828A93;
   --submit-button: #e16038;
   --text-input: #353535;
   --text-input-font: white;
   --nav-selected-button: #eca0a0;
   --nav-unselected-button: #ad7676;
   --page-separator: #fffff1;
+  
 }
