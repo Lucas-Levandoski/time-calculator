@@ -60,24 +60,25 @@ button:focus {
 }
 
 .light-mode-icon {
-  color: #E8C575;
+  color: #6344D4;
   font-size: 30px;
   cursor: pointer;
 }
 
 .dark-mode-icon {
-  color: #A58EBC;
+  color: #937CE6;
   font-size: 30px;
   cursor: pointer;
 }
 
 /* light and dark mode global variables */
 .light-mode {
-  --background: white;
-  --number-button: #8EB1BC;
-  --operation-button: #CADBE1;
+  color: #EAEBED;
+  --background: #C9BAFF;
+  --number-button: #6344D4;
+  --operation-button: #937CE6;
   --submit-button: #A58EBC;
-  --text-input: #e3f7ff;
+  --text-input: #EAEBED;
   --text-input-font: #222121;
   --nav-selected-button: #f9c1c1;
   --nav-unselected-button: #d5c5c5;
@@ -85,7 +86,7 @@ button:focus {
 }
 
 .dark-mode {
-  color: white;
+  color: #EAEBED;
   --background: #212A35;
   --number-button: #171C22;
   --operation-button: #828A93;
@@ -95,5 +96,5 @@ button:focus {
   --nav-selected-button: #eca0a0;
   --nav-unselected-button: #ad7676;
   --page-separator: #fffff1;
-  
+
 }

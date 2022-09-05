@@ -16,6 +16,8 @@
 }
 
 .calc-input {
+  min-width: 400px;
+  min-height: 70px;
   transition-property: color, background-color;
   transition-duration: 1s;
   transition-timing-function: ease-in-out;
