@@ -85,6 +85,7 @@ button:focus {
   --page-separator: #222121;
   --result-type-button: #937CE6;
   --selected-result-type-button: #6344D4;
+  --help-text: #212A35;
 }
 
 .dark-mode {
@@ -100,4 +101,5 @@ button:focus {
   --page-separator: #fffff1;
   --result-type-button: #937CE6;
   --selected-result-type-button: #6344D4;
+  --help-text: #828A93;
 }

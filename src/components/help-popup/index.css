@@ -25,3 +25,7 @@
   display: block;
   width: 500px;
 }
+
+.text-help-popup {
+  color: var(--help-text);
+}
